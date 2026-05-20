@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bgevdcypmtv4w"]
 
 [ext_resource type="Texture2D" uid="uid://o37wxtu1knum" path="res://tilemap_packed.png" id="1_30i1k"]
+[ext_resource type="Script" uid="uid://bip7vobj25l7s" path="res://scripts/battlescene.gd" id="1_bm4ed"]
 [ext_resource type="Texture2D" uid="uid://crrw0th1cet5r" path="res://Actor1.png" id="2_bm4ed"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kr7th"]
@@ -12,12 +13,14 @@ atlas = ExtResource("2_bm4ed")
 region = Rect2(144, 336, 48, 48)
 
 [node name="battlescene" type="Control" unique_id=1902588322]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_bm4ed")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1000934210]
 layout_mode = 1
@@ -68,7 +71,13 @@ stretch_mode = 5
 custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="mainlayout/PanelContainer" unique_id=1460261425]
+[node name="text" type="Label" parent="mainlayout/PanelContainer" unique_id=1460261425]
 layout_mode = 2
 text = "a wild [enemy] appears!"
 horizontal_alignment = 1
+
+[node name="run" type="Button" parent="mainlayout" unique_id=1531529822]
+layout_mode = 2
+text = "run"
+
+[connection signal="pressed" from="mainlayout/run" to="." method="_on_run_pressed"]
