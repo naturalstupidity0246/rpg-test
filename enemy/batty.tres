@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="enemyData" format=3 uid="uid://dslwlqdb107tr"]
+
+[ext_resource type="Script" uid="uid://dwtnij5ligmha" path="res://enemy/enemy_data.gd" id="1_qsr5h"]
+[ext_resource type="Texture2D" uid="uid://o37wxtu1knum" path="res://tilemap_packed.png" id="2_h6pn1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gr4sl"]
+atlas = ExtResource("2_h6pn1")
+region = Rect2(0, 160, 16, 16)
+
+[resource]
+script = ExtResource("1_qsr5h")
+name = "batty"
+texture = SubResource("AtlasTexture_gr4sl")
+health = 4
+damage = 6
+metadata/_custom_type_script = "uid://dwtnij5ligmha"

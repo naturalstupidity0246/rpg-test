@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="rpg test"
+run/main_scene="uid://ks63nu7ew43l"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+SignalBus="*uid://51cgy6sv6bg1"
 
 [display]
 

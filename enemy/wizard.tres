@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="enemyData" format=3 uid="uid://do56ulkt4exk"]
+
+[ext_resource type="Script" uid="uid://dwtnij5ligmha" path="res://enemy/enemy_data.gd" id="1_lrw16"]
+[ext_resource type="Texture2D" uid="uid://o37wxtu1knum" path="res://tilemap_packed.png" id="2_04ej6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6gdh"]
+atlas = ExtResource("2_04ej6")
+region = Rect2(0, 112, 16, 16)
+
+[resource]
+script = ExtResource("1_lrw16")
+name = "WIZARD"
+texture = SubResource("AtlasTexture_q6gdh")
+health = 24
+damage = 12
+metadata/_custom_type_script = "uid://dwtnij5ligmha"
