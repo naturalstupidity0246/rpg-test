@@ -32,11 +32,11 @@ func take_damage(amount):
 	if not linked_status.is_empty():
 		linked_status["current_health"] = current_health
 	
-	#transparent blink animation, visualization of taking damage
-	var tween = create_tween();
-	tween.tween_property(TextureRect, "modulate", Color(1, 1, 1, 0.5), 0.1)
+	##transparent blink animation, visualization of taking damage
+	#var tween = create_tween();
+	#tween.tween_property(TextureRect, "modulate", Color(1, 1, 1, 0.5), 0.1)
 	
 	if current_health <= 0:
 		#wait for hurt anim to finish
-		await tween.finished
+		#await tween.finished
 		queue_free()
