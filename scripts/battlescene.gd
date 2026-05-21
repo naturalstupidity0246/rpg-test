@@ -15,7 +15,9 @@ extends Control
 var active_party_units: Array = [];
 var active_enemy_units: Array = []
 
-#NEW INITALIZER
+var current_player_index: int = 0;
+var is_targeting_mode: bool = false;
+
 #initialize the battle scene itself
 func initialize(enemy_data_array: Array, player_status_array: Array):
 	#write the text
@@ -32,15 +34,25 @@ func initialize(enemy_data_array: Array, player_status_array: Array):
 		#set up the data from the unit
 		unit.set_data(enemy_data) #function from battle_unit.gd
 		
+		#update enemy health
+		unit.current_health = enemy_data.health
+		unit.max_health = enemy_data.health
 		
 		#manually update the health bar from the persistent status
 		unit.healthbar.max_value = enemy_data.health
 		unit.healthbar.value = enemy_data.health
 		
+		#connect the click signal
+		unit.on_selected.connect(on_enemy_selected)
+		
 		#add the our tracking list
 		active_enemy_units.append(unit)
+		
 	#spawn party loop
 	for status in player_status_array:
+		#if this hero is dead, we will skip them.
+		if status["current_health"] <= 0:
+			continue; #continue skips this iteration and move on to the next player
 		#create the unit from the loop
 		var unit = battle_unit_scn.instantiate()
 		#add it (the units) to the screen
@@ -48,12 +60,33 @@ func initialize(enemy_data_array: Array, player_status_array: Array):
 		#checkpoint callback: accessing the dictionary
 		unit.set_data(status["data"])
 		
+		#update actual health from player status
+		unit.current_health = status["current_health"]
+		unit.max_health = status["max_health"]
+		
 		#manually update the health bar from the persistent status
 		unit.healthbar.max_value = status["max_health"]
 		unit.healthbar.value = status["current_health"]
 		
+		#data link: connect our stats to the battle
+		unit.linked_status = status #linked_status comes from battle_unit.gd.
+		
 		#add the our tracking list
 		active_party_units.append(unit)
+	
+	start_player_turn();
+
+func start_player_turn():
+	#checks if we cycled through everyone
+	if current_player_index >= active_party_units.size():
+		enemy_phase() #all heroes moved, now enemies go.
+		return
+	#reset UI
+	attack.disabled = false;
+	is_targeting_mode = false;
+	run.disabled = false;
+	speaker.text = "What will " + active_party_units[current_player_index].data.name + " do??"
+
 
 #so if you choose to run away.. you run away..
 func _on_run_pressed() -> void:
@@ -64,55 +97,82 @@ func _on_run_pressed() -> void:
 	queue_free()
 
 
-#func _on_attack_pressed() -> void:
-	##lock buttons so we can't spam the attack
-	#attack.disabled = true;
-	#run.disabled = true;
-	#
-	##deal fake damage
-	#var player_hits = RandomNumberGenerator.new();
-	#var enemy_got_Hit = player_hits.randi_range(10, 15);
-	#current_enemy_health -= enemy_got_Hit;
-	#enemyhealthbar.value = current_enemy_health;
-	#text_label.text = "you hit the enemy and dealth" + str(enemy_got_Hit) + " damage!"
-	#
-	##THE MAGIC WORD! wait for 1 second
-	#await get_tree().create_timer(1.0).timeout
-	#
-	##check results
-	#if current_enemy_health <= 0:
-		#win_battle()
-	#else:
-		#enemy_turn();
+func _on_attack_pressed() -> void:
+	is_targeting_mode = true;
+	speaker.text = "select a target"
+	attack.disabled = true;
 
-func win_battle():
-	speaker.text = "You won!"
+func on_enemy_selected(enemy_unit):
+	if is_targeting_mode == true:
+		is_targeting_mode = false;
+		 
+		#who are we targetting?
+		var attacker = active_party_units[current_player_index]
+		
+		#deal damage
+		speaker.text = attacker.data.name + " attacks!";
+		await get_tree().create_timer(0.5).timeout
+		var player_damage = randf_range(attacker.data.damage - 5, attacker.data.damage + 5)
+		
+		enemy_unit.take_damage(player_damage)
+		
+		#check if enemy is dead
+		if enemy_unit.current_health <= 0:
+			active_enemy_units.erase(enemy_unit)
+		
+		await get_tree().create_timer(1.0).timeout
+		
+		#check for win condition
+		if active_enemy_units.size() <= 0:
+			win_battle()
+		else:
+			#next hero
+			current_player_index += 1;
+			start_player_turn()
+
+func enemy_phase():
+	speaker.text = "IT'S THE ENEMY'S TURN!"
 	await get_tree().create_timer(1.0).timeout
 	
+	#goes through each enemy
+	for enemy in active_enemy_units:
+		#stop if all party players are dead
+		if active_party_units.size() <= 0:
+			break;
+		
+		#pick a random target
+		var target = active_party_units.pick_random() #pick random is a function
+		
+		#attack!
+		speaker.text = enemy.data.name + " ATTACKS " + target.data.name + "!"
+		await get_tree().create_timer(0.5).timeout
+		target.take_damage(enemy.data.damage)
+		
+		#check if player is dead
+		if target.current_health <= 0:
+			active_party_units.erase(target)
+	
+	#end of enemy phase
+	current_player_index = 0;
+	if active_party_units.size() > 0:
+		start_player_turn()
+	else:
+		game_over()
+
+func win_battle():
+	speaker.text = "YOU WON THE BATTLE!"
+	await get_tree().create_timer(1.0).timeout
+	#unpause the game
 	get_tree().paused = false;
+	#destroy this battle scene
 	queue_free()
 
-#func enemy_turn():
-	#text_label.text = "the monster takes it's turn!"
-	#await get_tree().create_timer(1.0).timeout
-	#
-	##modify the REAL player script directly
-	#player.current_health -= enemy_damage;
-	#playerhealthbar.value = player.current_health;
-	#
-	#text_label.text = "you took " + str(enemy_damage) + " damage!"
-	#await get_tree().create_timer(1.0).timeout
-	#
-	##check for game over
-	#if player.current_health <= 0:
-		#text_label.text = "you were defeated"
-		#await get_tree().create_timer(2.0).timeout
-		#
-		##restart the game
-		#get_tree().paused = false;
-		#get_tree().reload_current_scene()
-	#else:
-		##give control back to the player;
-		#attack.disabled = false;
-		#run.disabled = false;
-		#text_label.text = "what will you do?"
+func game_over():
+	speaker.text = "you lost :/"
+	await get_tree().create_timer(1.0).timeout
+	#unpause the game
+	get_tree().paused = false;
+	#destroy this battle scene
+	queue_free()
+	#reload current scene
+	get_tree().reload_current_scene()

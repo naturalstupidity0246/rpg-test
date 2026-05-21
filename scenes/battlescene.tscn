@@ -31,6 +31,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="playerside" type="VBoxContainer" parent="mainlayout" unique_id=550502532]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
 [node name="battlearea" type="HBoxContainer" parent="mainlayout" unique_id=736348490]
 layout_mode = 2
 size_flags_vertical = 3
@@ -38,10 +43,12 @@ size_flags_vertical = 3
 [node name="enemyside" type="VBoxContainer" parent="mainlayout/battlearea" unique_id=1901058380]
 layout_mode = 2
 size_flags_horizontal = 3
+alignment = 1
 
-[node name="playerside" type="VBoxContainer" parent="mainlayout/battlearea" unique_id=550502532]
+[node name="playerside" type="VBoxContainer" parent="mainlayout/battlearea" unique_id=892355187]
 layout_mode = 2
 size_flags_horizontal = 3
+alignment = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="mainlayout" unique_id=1433269980]
 custom_minimum_size = Vector2(0, 64)

@@ -2,29 +2,89 @@
 
 [ext_resource type="Script" uid="uid://dkvj7s0j3vus2" path="res://scripts/battle_unit.gd" id="1_trae8"]
 
-[node name="battleUnit" type="VBoxContainer" unique_id=436593053]
-offset_right = 40.0
-offset_bottom = 40.0
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_trae8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p0cq7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_njnh6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gw114"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j6crx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ttxbh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sbph8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8o4y4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ynmuu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8t5dn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5gt3g"]
+
+[node name="battleUnit" type="Control" unique_id=661106297]
+process_mode = 3
+custom_minimum_size = Vector2(32, 64)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 100.0
+offset_bottom = 73.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("1_trae8")
 
-[node name="unit_name" type="Label" parent="." unique_id=731168887]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1003289454]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="unit_name" type="Label" parent="VBoxContainer" unique_id=731168887]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "name"
 horizontal_alignment = 1
 
-[node name="character" type="TextureRect" parent="." unique_id=1992316657]
-texture_filter = 1
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-expand_mode = 1
-stretch_mode = 5
-flip_h = true
-
-[node name="healthbar" type="ProgressBar" parent="." unique_id=312763317]
+[node name="healthbar" type="ProgressBar" parent="VBoxContainer" unique_id=312763317]
 custom_minimum_size = Vector2(100, 10)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 show_percentage = false
+
+[node name="character" type="TextureRect" parent="VBoxContainer" unique_id=1992316657]
+texture_filter = 1
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="selected" type="Button" parent="." unique_id=90646653]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_trae8")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_p0cq7")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_njnh6")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_gw114")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_j6crx")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_ttxbh")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_sbph8")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_8o4y4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ynmuu")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_8t5dn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5gt3g")
+
+[connection signal="pressed" from="selected" to="." method="_on_selected_pressed"]
