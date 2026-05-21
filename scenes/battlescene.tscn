@@ -3,6 +3,22 @@
 [ext_resource type="Script" uid="uid://bip7vobj25l7s" path="res://scripts/battlescene.gd" id="1_bm4ed"]
 [ext_resource type="PackedScene" uid="uid://v8lk7lwxg6rw" path="res://scenes/battle_unit.tscn" id="2_30i1k"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_30i1k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bm4ed"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kr7th"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fbgux"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wj8kd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r612u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bg738"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_reqto"]
+
 [node name="battlescene" type="Control" unique_id=1902588322]
 process_mode = 3
 layout_mode = 3
@@ -65,11 +81,21 @@ alignment = 1
 
 [node name="attack" type="Button" parent="mainlayout/action_btns" unique_id=98659592]
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_30i1k")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_bm4ed")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_kr7th")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_fbgux")
 text = "attack"
 
 [node name="run" type="Button" parent="mainlayout/action_btns" unique_id=1531529822]
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_wj8kd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_r612u")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_bg738")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_reqto")
 text = "run"
+
+[node name="music" type="AudioStreamPlayer2D" parent="." unique_id=801266319]
 
 [connection signal="pressed" from="mainlayout/action_btns/attack" to="." method="_on_attack_pressed"]
 [connection signal="pressed" from="mainlayout/action_btns/run" to="." method="_on_run_pressed"]

@@ -20,7 +20,7 @@ func start_battle(enemy_data):
 	
 	#we will pass a list of enemies
 	#for testing, we will dupilicate one enmy three times
-	var enemy_horde = [enemy_data, enemy_data, enemy_data]
+	var enemy_horde = [enemy_data]
 	#pass the enemy AND player data to the battle scene
 	battle_instance.initialize(enemy_horde, player.party_status)
 	

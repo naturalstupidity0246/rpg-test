@@ -9,6 +9,7 @@ extends Control
 @onready var run: Button = $mainlayout/action_btns/run
 @onready var enemyside: VBoxContainer = $mainlayout/battlearea/enemyside
 @onready var playerside: VBoxContainer = $mainlayout/battlearea/playerside
+@onready var music: AudioStreamPlayer2D = $music
 
 #THE LISTS
 #we will use these arrays to track who is alive in the fight
@@ -20,11 +21,20 @@ var is_targeting_mode: bool = false;
 
 #initialize the battle scene itself
 func initialize(enemy_data_array: Array, player_status_array: Array):
+	#hides the buttons while introducing the enemy
+	attack.hide()
+	run.hide()
+	#plays the music
+	var audio = "res://music/Rude Buster.mp3";
+	music.stream = load(audio)
+	music.play()
 	#write the text
 	if enemy_data_array.size() > 1:
 		speaker.text = "A WILD GROUP OF" + enemy_data_array[0].name + "S HAS BESTOWED UPON YE!"
+	elif enemy_data_array.size() == 1:
+		speaker.text = "a " + enemy_data_array[0].name +" has appeared!"
 	
-	#2 spawn enemies loop
+	#spawn enemies loop
 	for enemy_data in enemy_data_array:
 		#create the unit from the loop
 		var unit = battle_unit_scn.instantiate()
@@ -47,6 +57,10 @@ func initialize(enemy_data_array: Array, player_status_array: Array):
 		
 		#add the our tracking list
 		active_enemy_units.append(unit)
+		await get_tree().create_timer(3.0).timeout
+		#shows the buttons when intro is finished
+		attack.show()
+		run.show()
 		
 	#spawn party loop
 	for status in player_status_array:
