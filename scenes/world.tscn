@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://dwtnij5ligmha" path="res://enemy/enemy_data.gd" id="3_qfnet"]
 [ext_resource type="Resource" uid="uid://dslwlqdb107tr" path="res://enemy/batty.tres" id="4_i7141"]
 [ext_resource type="Resource" uid="uid://do56ulkt4exk" path="res://enemy/wizard.tres" id="5_4mrxx"]
-[ext_resource type="Script" uid="uid://dpvh833wgt0do" path="res://ally/party_data.gd" id="5_q5onr"]
+[ext_resource type="Script" uid="uid://dpvh833wgt0do" path="res://scripts/party_data.gd" id="5_q5onr"]
 [ext_resource type="Resource" uid="uid://mx1fbng4kjfp" path="res://enemy/slime.tres" id="6_7r4gi"]
 [ext_resource type="Resource" uid="uid://dr8s7yvn25ywk" path="res://ally/fighter.tres" id="6_jhx03"]
 [ext_resource type="Resource" uid="uid://dh6ny8dkwi0yf" path="res://ally/witch.tres" id="7_o8fc1"]
