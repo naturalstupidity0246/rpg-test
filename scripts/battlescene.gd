@@ -4,9 +4,12 @@ extends Control
 @export var battle_unit_scn: PackedScene
 
 #IMPORTANT check your scene tree. names must match
-@onready var speaker: Label = $mainlayout/PanelContainer/speaker
-@onready var attack: Button = $mainlayout/action_btns/attack
-@onready var run: Button = $mainlayout/action_btns/run
+@onready var speaker: Label = $mainlayout/textbox/speaker
+#interaction buttons
+@onready var buttonbox: PanelContainer = $mainlayout/buttonbox
+@onready var attack: Button = $mainlayout/buttonbox/action_btns/attack
+@onready var run: Button = $mainlayout/buttonbox/action_btns/run
+#interaction buttons
 @onready var enemyside: VBoxContainer = $mainlayout/battlearea/enemyside
 @onready var playerside: VBoxContainer = $mainlayout/battlearea/playerside
 @onready var music: AudioStreamPlayer2D = $music
@@ -22,8 +25,7 @@ var is_targeting_mode: bool = false;
 #initialize the battle scene itself
 func initialize(enemy_data_array: Array, player_status_array: Array):
 	#hides the buttons while introducing the enemy
-	attack.hide()
-	run.hide()
+	buttonbox.hide()
 	#plays the music
 	var audio = "res://music/Rude Buster.mp3";
 	music.stream = load(audio)
@@ -59,8 +61,7 @@ func initialize(enemy_data_array: Array, player_status_array: Array):
 		active_enemy_units.append(unit)
 		await get_tree().create_timer(3.0).timeout
 		#shows the buttons when intro is finished
-		attack.show()
-		run.show()
+		buttonbox.show()
 		
 	#spawn party loop
 	for status in player_status_array:
