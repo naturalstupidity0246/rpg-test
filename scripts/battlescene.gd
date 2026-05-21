@@ -145,8 +145,8 @@ func enemy_phase():
 		
 		#attack!
 		speaker.text = enemy.data.name + " ATTACKS " + target.data.name + "!"
-		await get_tree().create_timer(0.5).timeout
 		target.take_damage(enemy.data.damage)
+		await get_tree().create_timer(1).timeout
 		
 		#check if player is dead
 		if target.current_health <= 0:
