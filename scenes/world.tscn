@@ -10,7 +10,6 @@
 [ext_resource type="Resource" uid="uid://mx1fbng4kjfp" path="res://enemy/slime.tres" id="6_7r4gi"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rwgxs"]
-load_path = "res://.godot/imported/tilemap.png-c9e85db618230a9b952e774ad1622a74.ctex"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4wyf3"]
 texture = SubResource("CompressedTexture2D_rwgxs")

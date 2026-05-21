@@ -3,6 +3,7 @@ extends Node2D
 #we want to spawn the battle scene
 @export var battle_scn: PackedScene
 @onready var ui_layer: CanvasLayer = $UIlayer
+@onready var player: CharacterBody2D = $player
 
 func _ready():
 	SignalBus.encounter_started.connect(start_battle)
@@ -17,5 +18,6 @@ func start_battle(enemy_data):
 	#add it to the screen (make it a child of the UIlayer
 	ui_layer.add_child(battle_instance)
 	
-	#pass the enemy data to the battle scene
-	battle_instance.initialize(enemy_data)
+	#pass the enemy AND player data to the battle scene
+	battle_instance.initialize(enemy_data, player)
+	

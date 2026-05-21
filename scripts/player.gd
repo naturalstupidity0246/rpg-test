@@ -5,6 +5,16 @@ const speed = 100;
 var last_dir: Vector2 = Vector2.RIGHT
 var can_move = true;
 
+#-------------------------------------PLAYER STATS
+@export var max_health: int = 100;
+var current_health: int = 100;
+
+func _ready():
+	#initalizes the health
+	current_health = max_health
+
+#-------------------------------------ENEMY RNG
+
 @export var ground: TileMapLayer
 @export var encounter_rate: float = 1.0; #100% chance of encountering a monster
 @export var monsters: Array[enemyData] 
@@ -12,11 +22,15 @@ var can_move = true;
 var distance_traveled: float = 0.0;
 const ENCOUNTER_THRESHOLD: float = 50.0 #the time set between each monster encounter
 
+#-------------------------------------ENEMY RNG
+
 #main function.. processes everything player does
 func _physics_process(delta: float) -> void:
 	process_movement();
-	process_animation()
+	process_animation() #related to the player's movement.. ignore
 	move_and_slide();
+	
+	#-------------------------------------ENEMY RNG
 	
 	#track distance
 	if velocity.length() > 0: #so if the player is moving to add to the distance traveled
