@@ -1,16 +1,15 @@
-[gd_resource type="Resource" script_class="partyData" format=3 uid="uid://dh6ny8dkwi0yf"]
+[gd_resource type="Resource" script_class="healer" format=3 uid="uid://bynhyhp2u73p4"]
 
-[ext_resource type="Script" uid="uid://dpvh833wgt0do" path="res://scripts/party_data.gd" id="1_ipkjs"]
+[ext_resource type="Script" uid="uid://ciuufdkys6xnb" path="res://ally/healer.gd" id="1_tcjid"]
 [ext_resource type="Texture2D" uid="uid://o37wxtu1knum" path="res://tilemap_packed.png" id="2_6mmit"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1odlc"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_k23b4"]
 atlas = ExtResource("2_6mmit")
 region = Rect2(64, 128, 16, 16)
 
 [resource]
-script = ExtResource("1_ipkjs")
+script = ExtResource("1_tcjid")
+healing_strength = 80
 name = "witch"
-texture = SubResource("AtlasTexture_1odlc")
-max_health = 100
-damage = 5
-metadata/_custom_type_script = "uid://dpvh833wgt0do"
+texture = SubResource("AtlasTexture_k23b4")
+metadata/_custom_type_script = "uid://ciuufdkys6xnb"

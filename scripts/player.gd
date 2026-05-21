@@ -6,7 +6,7 @@ var last_dir: Vector2 = Vector2.RIGHT
 var can_move = true;
 
 #-------------------------------------PARTY MEMBERS
-@export var party_members: Array[partyData]
+@export var party_members: Array[Resource]
 var party_status: Array = []
 
 

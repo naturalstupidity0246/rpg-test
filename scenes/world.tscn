@@ -7,10 +7,9 @@
 [ext_resource type="Script" uid="uid://dwtnij5ligmha" path="res://enemy/enemy_data.gd" id="3_qfnet"]
 [ext_resource type="Resource" uid="uid://dslwlqdb107tr" path="res://enemy/batty.tres" id="4_i7141"]
 [ext_resource type="Resource" uid="uid://do56ulkt4exk" path="res://enemy/wizard.tres" id="5_4mrxx"]
-[ext_resource type="Script" uid="uid://dpvh833wgt0do" path="res://scripts/party_data.gd" id="5_q5onr"]
 [ext_resource type="Resource" uid="uid://mx1fbng4kjfp" path="res://enemy/slime.tres" id="6_7r4gi"]
 [ext_resource type="Resource" uid="uid://dr8s7yvn25ywk" path="res://ally/fighter.tres" id="6_jhx03"]
-[ext_resource type="Resource" uid="uid://dh6ny8dkwi0yf" path="res://ally/witch.tres" id="7_o8fc1"]
+[ext_resource type="Resource" uid="uid://bynhyhp2u73p4" path="res://ally/witch.tres" id="7_o8fc1"]
 [ext_resource type="Resource" uid="uid://dkxdpxb4yamx" path="res://ally/witchsintern.tres" id="8_xo05s"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rwgxs"]
@@ -465,7 +464,7 @@ tile_set = SubResource("TileSet_71j4m")
 [node name="player" parent="." unique_id=354962168 node_paths=PackedStringArray("ground") instance=ExtResource("2_rwgxs")]
 y_sort_enabled = true
 position = Vector2(240, 165)
-party_members = Array[ExtResource("5_q5onr")]([ExtResource("6_jhx03"), ExtResource("7_o8fc1"), ExtResource("8_xo05s")])
+party_members = Array[Resource]([ExtResource("6_jhx03"), ExtResource("7_o8fc1"), ExtResource("8_xo05s")])
 ground = NodePath("../ground")
 monsters = Array[ExtResource("3_qfnet")]([ExtResource("4_i7141"), ExtResource("5_4mrxx"), ExtResource("6_7r4gi")])
 
