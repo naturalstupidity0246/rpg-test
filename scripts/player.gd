@@ -5,13 +5,25 @@ const speed = 100;
 var last_dir: Vector2 = Vector2.RIGHT
 var can_move = true;
 
+#-------------------------------------PARTY MEMBERS
+@export var party_members: Array[partyData]
+var party_status: Array = []
+
+
 #-------------------------------------PLAYER STATS
-@export var max_health: int = 100;
-var current_health: int = 100;
+
 
 func _ready():
-	#initalizes the health
-	current_health = max_health
+	#loop through our starter cards and build our party
+	for member in party_members:
+		#create a dictionary to track realtime stats
+		var status = {
+			"data": member,
+			"max_health": member.max_health,
+			"current_health": member.max_health
+		}
+		
+		party_status.append(status)
 
 #-------------------------------------ENEMY RNG
 
@@ -46,7 +58,8 @@ func check_for_encounter():
 	var tile_data = ground.get_cell_tile_data(map_pos);
 	
 	#check our invisible monsters
-	if tile_data.get_custom_data("is_encounter_zone"):
+	#add "tile_data and" to make sure tile actually exists
+	if tile_data and tile_data.get_custom_data("is_encounter_zone"):
 		print("oopsies!")
 		
 		#roll the dice

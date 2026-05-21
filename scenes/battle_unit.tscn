@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://v8lk7lwxg6rw"]
+
+[ext_resource type="Script" uid="uid://dkvj7s0j3vus2" path="res://scripts/battle_unit.gd" id="1_trae8"]
+
+[node name="battleUnit" type="VBoxContainer" unique_id=436593053]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_trae8")
+
+[node name="unit_name" type="Label" parent="." unique_id=731168887]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "name"
+horizontal_alignment = 1
+
+[node name="character" type="TextureRect" parent="." unique_id=1992316657]
+texture_filter = 1
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="healthbar" type="ProgressBar" parent="." unique_id=312763317]
+custom_minimum_size = Vector2(100, 10)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+show_percentage = false

@@ -18,6 +18,9 @@ func start_battle(enemy_data):
 	#add it to the screen (make it a child of the UIlayer
 	ui_layer.add_child(battle_instance)
 	
+	#we will pass a list of enemies
+	#for testing, we will dupilicate one enmy three times
+	var enemy_horde = [enemy_data, enemy_data, enemy_data]
 	#pass the enemy AND player data to the battle scene
-	battle_instance.initialize(enemy_data, player)
+	battle_instance.initialize(enemy_horde, player.party_status)
 	

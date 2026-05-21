@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="partyData" format=3 uid="uid://dr8s7yvn25ywk"]
+
+[ext_resource type="Script" uid="uid://dpvh833wgt0do" path="res://scripts/party_data.gd" id="1_i587e"]
+[ext_resource type="Texture2D" uid="uid://o37wxtu1knum" path="res://tilemap_packed.png" id="2_ww287"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvywi"]
+atlas = ExtResource("2_ww287")
+region = Rect2(48, 112, 16, 16)
+
+[resource]
+script = ExtResource("1_i587e")
+name = "fighter"
+texture = SubResource("AtlasTexture_nvywi")
+max_health = 80
+damage = 20
+metadata/_custom_type_script = "uid://dpvh833wgt0do"

@@ -1,16 +1,7 @@
 [gd_scene format=3 uid="uid://bgevdcypmtv4w"]
 
-[ext_resource type="Texture2D" uid="uid://o37wxtu1knum" path="res://tilemap_packed.png" id="1_30i1k"]
 [ext_resource type="Script" uid="uid://bip7vobj25l7s" path="res://scripts/battlescene.gd" id="1_bm4ed"]
-[ext_resource type="Texture2D" uid="uid://crrw0th1cet5r" path="res://Actor1.png" id="2_bm4ed"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kr7th"]
-atlas = ExtResource("1_30i1k")
-region = Rect2(0, 160, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fbgux"]
-atlas = ExtResource("2_bm4ed")
-region = Rect2(144, 336, 48, 48)
+[ext_resource type="PackedScene" uid="uid://v8lk7lwxg6rw" path="res://scenes/battle_unit.tscn" id="2_30i1k"]
 
 [node name="battlescene" type="Control" unique_id=1902588322]
 process_mode = 3
@@ -21,6 +12,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bm4ed")
+battle_unit_scn = ExtResource("2_30i1k")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1000934210]
 layout_mode = 1
@@ -43,62 +35,34 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="enemyside" type="CenterContainer" parent="mainlayout/battlearea" unique_id=1399709384]
+[node name="enemyside" type="VBoxContainer" parent="mainlayout/battlearea" unique_id=1901058380]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="mainlayout/battlearea/enemyside" unique_id=1583241522]
-layout_mode = 2
-
-[node name="enemyhealthbar" type="ProgressBar" parent="mainlayout/battlearea/enemyside/VBoxContainer" unique_id=1870233796]
-custom_minimum_size = Vector2(100, 20)
-layout_mode = 2
-show_percentage = false
-
-[node name="enemy" type="TextureRect" parent="mainlayout/battlearea/enemyside/VBoxContainer" unique_id=1454715786]
-texture_filter = 1
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-texture = SubResource("AtlasTexture_kr7th")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="playerside" type="CenterContainer" parent="mainlayout/battlearea" unique_id=1435104043]
+[node name="playerside" type="VBoxContainer" parent="mainlayout/battlearea" unique_id=550502532]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="mainlayout/battlearea/playerside" unique_id=1653707694]
-layout_mode = 2
-
-[node name="playerhealthbar" type="ProgressBar" parent="mainlayout/battlearea/playerside/VBoxContainer" unique_id=2086831177]
-custom_minimum_size = Vector2(100, 20)
-layout_mode = 2
-show_percentage = false
-
-[node name="player" type="TextureRect" parent="mainlayout/battlearea/playerside/VBoxContainer" unique_id=1349603412]
-texture_filter = 1
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-texture = SubResource("AtlasTexture_fbgux")
-expand_mode = 1
-stretch_mode = 5
 
 [node name="PanelContainer" type="PanelContainer" parent="mainlayout" unique_id=1433269980]
-custom_minimum_size = Vector2(0, 128)
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 
-[node name="text" type="Label" parent="mainlayout/PanelContainer" unique_id=1460261425]
+[node name="speaker" type="Label" parent="mainlayout/PanelContainer" unique_id=1460261425]
 layout_mode = 2
-text = "a wild [enemy] appears!"
+text = "a wild group of [enemy] appears!"
 horizontal_alignment = 1
 
-[node name="attack" type="Button" parent="mainlayout" unique_id=98659592]
+[node name="action_btns" type="HBoxContainer" parent="mainlayout" unique_id=205099887]
+layout_mode = 2
+alignment = 1
+
+[node name="attack" type="Button" parent="mainlayout/action_btns" unique_id=98659592]
 layout_mode = 2
 text = "attack"
 
-[node name="run" type="Button" parent="mainlayout" unique_id=1531529822]
+[node name="run" type="Button" parent="mainlayout/action_btns" unique_id=1531529822]
 layout_mode = 2
 text = "run"
 
-[connection signal="pressed" from="mainlayout/attack" to="." method="_on_attack_pressed"]
-[connection signal="pressed" from="mainlayout/run" to="." method="_on_run_pressed"]
+[connection signal="pressed" from="mainlayout/action_btns/attack" to="." method="_on_attack_pressed"]
+[connection signal="pressed" from="mainlayout/action_btns/run" to="." method="_on_run_pressed"]
